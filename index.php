@@ -5,6 +5,7 @@
     <link rel="profile" href="http://gmpg.org/xfn/11" />
     <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
     <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" /> 
+    <link href='http://fonts.googleapis.com/css?family=Flamenco' rel='stylesheet' type='text/css'>
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/js/main.js" type="text/javascript"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/js/jquery.leanModal.min.js" type="text/javascript"></script>
@@ -14,16 +15,12 @@
     <?php wp_head(); ?>
   </head>
   <body <?php body_class(); ?>>
-    <div id="logo">
-      <img src="<?php echo get_template_directory_uri(); ?>/img/logo.png">
-    </div>
     <div id="container">
 
       <header id="header">
         <h1><a href="<?php bloginfo('url'); ?>"><?php bloginfo( 'name' ); ?></a></h1>
         <?php if ( has_nav_menu( 'menu' ) ) : wp_nav_menu(); ?>
         <?php endif; ?>
-        <?php get_search_form( $echo ); ?>
         <div class="clear"></div>
       </header><!-- header -->
 
@@ -37,6 +34,13 @@
           </ul>
         <?php endif; ?>
 
+      </aside>
+
+      <aside id="lateral_search">
+        <?php get_search_form( $echo ); ?>
+        <div id="logo">
+          <img src="<?php echo get_template_directory_uri(); ?>/img/logo.png">
+        </div>
       </aside>
 
       <div id="content">   
