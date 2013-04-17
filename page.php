@@ -4,12 +4,8 @@
     <meta charset="<?php bloginfo( 'charset' ); ?>" />
     <link rel="profile" href="http://gmpg.org/xfn/11" />
     <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
-    <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" /> 
     <link href='http://fonts.googleapis.com/css?family=Flamenco' rel='stylesheet' type='text/css'>
-    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-    <script src="<?php echo get_template_directory_uri(); ?>/js/main.js" type="text/javascript"></script>
-    <script src="<?php echo get_template_directory_uri(); ?>/js/jquery.leanModal.min.js" type="text/javascript"></script>
-
+    <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
     <title><?php bloginfo( 'name' ); ?><?php wp_title( '&mdash;' ); ?></title>
     <?php if ( is_singular() && get_option( 'thread_comments') ) wp_enqueue_script( 'comment-reply' ); ?>
     <?php wp_head(); ?>
@@ -29,33 +25,33 @@
           <img src="<?php echo get_template_directory_uri(); ?>/img/logo.png">
         </div>
       </aside>
-
       <aside id="menu_lateral">
         <?php get_search_form( $echo ); ?>
-        
-        <?php if ( have_posts() ) : ?>
-          <ul class="lateral_menu">
-          <?php while ( have_posts() ) : the_post(); ?>
-            <li id="post_<?php the_ID();?>" class="post_link"><a rel="leanModal" href="#content_<?php the_ID();?>"><?php the_title(); ?></a></li>
-          <?php endwhile; ?>
-          </ul>
-        <?php endif; ?>
       </aside>
-      
-      <div id="content">   
-        <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-            <div class="post_<?php the_ID();?> left post">
-              <?php if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it. ?>
-                <a rel="leanModal" href="#content_<?php the_ID();?>"><?php the_post_thumbnail(); ?></a>
-              <?php } ?>
-              
-              <div id="content_<?php the_ID();?>" class="post-content">
-                <?php the_content(); ?>
-              </div>
-            </div>
-          <?php endwhile; ?>
-        <?php endif; ?>
 
+      <div id="content">
+        <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+          <div <?php post_class(); ?>>
+            <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+            <?php the_content(); ?>
+            <?php if ( !is_singular() && get_the_title() == '' ) : ?>
+              <a href="<?php the_permalink(); ?>">(more...)</a>
+            <?php endif; ?>
+            <?php if ( is_singular() ) : ?>
+              <div class="pagination"><?php wp_link_pages(); ?></div>
+            <?php endif; ?>
+            <div class="clear"> </div>
+          </div><!-- post_class() -->
+          <?php if ( is_singular() ) : ?>
+            <?php comments_template(); ?>
+          <?php endif; ?>
+        <?php endwhile; else: ?>
+          <div class="hentry"><h2>Ops, página não encontrada.</h2></div>
+        <?php endif; ?>
+        <?php if ( is_active_sidebar( 'widgets' ) ) : ?>
+          <div class="widgets"><?php dynamic_sidebar( 'widgets' ); ?></div>
+        <?php endif; ?>
+        <div class="clear"> </div>
       </div><!-- content -->
     </div><!-- container -->
     <?php wp_footer(); ?>
