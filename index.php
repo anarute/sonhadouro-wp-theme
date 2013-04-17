@@ -24,8 +24,15 @@
         <div class="clear"></div>
       </header><!-- header -->
 
-      <aside id="menu_lateral">
+      <aside id="lateral_search">
+        <div id="logo">
+          <img src="<?php echo get_template_directory_uri(); ?>/img/logo.png">
+        </div>
+      </aside>
 
+      <aside id="menu_lateral">
+        <?php get_search_form( $echo ); ?>
+        
         <?php if ( have_posts() ) : ?>
           <ul class="lateral_menu">
           <?php while ( have_posts() ) : the_post(); ?>
@@ -33,16 +40,8 @@
           <?php endwhile; ?>
           </ul>
         <?php endif; ?>
-
       </aside>
-
-      <aside id="lateral_search">
-        <?php get_search_form( $echo ); ?>
-        <div id="logo">
-          <img src="<?php echo get_template_directory_uri(); ?>/img/logo.png">
-        </div>
-      </aside>
-
+      
       <div id="content">   
         <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
             <div class="post_<?php the_ID();?> left post">

@@ -5,12 +5,12 @@ jQuery(function(){
 		jQuery('.'+post_id+'> a').css('opacity','1');
 	}).mouseout(function(){
 		var post_id = jQuery(this).attr('id');
-		jQuery('.'+post_id+'> a').css('opacity','0.1');
+		jQuery('.'+post_id+'> a').css('opacity','0.05');
 	});
 	jQuery('.post > a').mouseover(function(){
 		jQuery(this).css('opacity','1');
 	}).mouseout(function(){
-		jQuery(this).css('opacity','0.1');
+		jQuery(this).css('opacity','0.05');
 	});
 
 
